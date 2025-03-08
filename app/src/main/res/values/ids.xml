@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nomPrenomEditTxt" type="id" />
+    <item name="emailEditTxt" type="id" />
+    <item name="phoneEditTxt" type="id" />
+    <item name="adresseEditTxt" type="id" />
+    <item name="radioGroupGenre" type="id" />
+    <item name="btnEnvoyer" type="id" />
+</resources>

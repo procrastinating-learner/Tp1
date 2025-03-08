@@ -44,10 +44,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         fadeInOut.setRepeatCount(Animation.INFINITE);
         text.startAnimation(fadeInOut);
         Thread t =new Thread(){
+            @Override
             public void run(){
                 try {
                     Thread.sleep(5000);
-                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity2.class);
+                    Intent intent = new Intent(SplashScreenActivity.this,MainActivity2.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

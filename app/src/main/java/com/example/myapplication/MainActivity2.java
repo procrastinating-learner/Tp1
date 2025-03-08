@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -15,38 +17,54 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity2 extends AppCompatActivity {
 
+    private Spinner villeSpinner;
+    private EditText nomPrenomEditTxt, emailEditTxt, phoneEditTxt, adresseEditTxt;
+    private RadioGroup radiogenre;
+
+    private Button btnEnvoyer;
+    private ArrayList<String> villes;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
-        EditText Nom = findViewById(R.id.editnom);
-        EditText Email = findViewById(R.id.emailtxt);
-        EditText Phone = findViewById(R.id.editTextPhone);
-        EditText Adresse = findViewById(R.id.adresseedittxt);
-        Spinner Ville = findViewById(R.id.villespinner);
-        RadioButton Masculin= findViewById(R.id.masculin);
-        RadioButton Feminin=findViewById(R.id.feminin);
-        RadioGroup radiogenre=findViewById(R.id.radiogenre);
-        Button Envoyer=findViewById(R.id.btnenvoyer);
-Envoyer.setOnClickListener(new View.OnClickListener() {
+
+        villeSpinner = findViewById(R.id.villespinner);
+        nomPrenomEditTxt = findViewById(R.id.nomPrenomEditTxt);
+        emailEditTxt = findViewById(R.id.emailEditTxt);
+        phoneEditTxt = findViewById(R.id.phoneEditTxt);
+        adresseEditTxt = findViewById(R.id.adresseEditTxt);
+        radiogenre = findViewById(R.id.radioGroupGenre);
+        btnEnvoyer = findViewById(R.id.btnEnvoyer);
+
+        villes = new ArrayList<>();
+        villes.add("Sélectionnez une ville");
+        villes.add("Marrakech");
+        villes.add("Tanger");
+        villes.add("Casablanca");
+        villes.add("Rabat");
+        villes.add("Agadir");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, villes);
+        villeSpinner.setAdapter(adapter);
+
+
+btnEnvoyer.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        String nom=Nom.getText().toString();
-        String email=Email.getText().toString();
-        String phone=Phone.getText().toString();
-        String adresse=Adresse.getText().toString();
-        String ville=Ville.getSelectedItem().toString();
+        String nom=nomPrenomEditTxt.getText().toString();
+        String email=emailEditTxt.getText().toString();
+        String phone=phoneEditTxt.getText().toString();
+        String adresse=adresseEditTxt.getText().toString();
+        String ville=villeSpinner.getSelectedItem().toString();
         int selectedid=radiogenre.getCheckedRadioButtonId();
-        String genre="";
-        if(selectedid== R.id.masculin){
-            genre="Homme";
-        }
-        else if (selectedid==R.id.feminin){
-             genre= "Femme";
-        }
+        RadioButton selectedRadioButton = findViewById(selectedid);
+        String genre = selectedRadioButton != null ? selectedRadioButton.getText().toString() : "Non spécifié";
         Intent intent=new Intent(MainActivity2.this,RecapActivity.class);
         intent.putExtra("nom",nom);
         intent.putExtra("email",email);

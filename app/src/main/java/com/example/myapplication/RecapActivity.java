@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ public class RecapActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_recap);
         TextView textrecap = findViewById(R.id.textrecap);
+
+        Intent intent = getIntent();
         String nom = getIntent().getStringExtra("nom");
         String email = getIntent().getStringExtra("email");
         String phone = getIntent().getStringExtra("phone");
